@@ -1,4 +1,4 @@
-# Bots sociales en la #AperturasDeSesiones #
+# Bots sociales en las #AperturasDeSesiones #
 Analisis de bots sociales en Twitter durante los discursos de Apertura de Sesiones del Congreso en Argentina (2016, 2020): https://twitter.com/guadag12/status/1236271057889345536
 
 El repositorio cuenta con diferentes scripts (redactados en R (3) y en Python(1)) que siguen el siguiente orden:
