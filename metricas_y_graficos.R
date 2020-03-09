@@ -5,8 +5,10 @@ library(sqldf)
 #METRICAS Y GRAFICOS P/ 2016
 sesion2016 <- read.csv("D:/Guada/sesiones2016/archivos_def/muestra_2016_procesada.csv")
 tweets2016 <- read.csv("D:/Guada/sesiones2016/archivos_def/tweets2016.csv")
+names(sesion2016)[1] <- "screenName" #Cambiamos el nombre de la primera columna 
 names(sesion2016)[2] <- "score" #Cambiamos el nombre de la segunda columna 
-sesion2016 <- sesion2016 %>% drop_na() #eliminamos los usuarios que fueron eliminados o dejaron de existir
+sesion2016 <- sesion2016 %>% filter(screenName != "no hay dato o no es str") #filtramos los casos donde no hay informacion
+
 sesion2016$screenName <- gsub(x= sesion2016$screenName, pattern = "[']", replacement = "") #eliminamos las '' de los usuarios
 
 data_2016 <- left_join(sesion2016, tweets2016) #hacemos un join con "tweets2016" xq nos interesa la columna "hashtag"
@@ -21,7 +23,6 @@ data_2016 <- data_2016 %>% mutate(BOTNOT = case_when( #asignamos mediante case_w
   TRUE ~ "NA"
 ))     
 data_2016 <- data_2016 %>% filter(BOTNOT != "NA") #volvemos a chequear que no haya NA's en la columna BOTNOT
-data_2016 <- data_2016 %>% filter(hashtag != "NA")#volvemos a chequear que no haya NA's en # 
 
 data_2016 %>%                     #sacamos metricas para conocer '%' de bots en la conversación
   group_by(BOTNOT) %>%
@@ -59,8 +60,9 @@ write.csv(data_2016, "archivo_final_2016.csv", row.names = F)
 sesion2020 <- read_csv("D:/Guada/sesiones2016/archivos_def/muestra_2020_procesada.csv", #Traemos el archivo terminado para 2016
 )
 tweets2020 <- read.csv("D:/Guada/sesiones2016/archivos_def/tweets2020.csv")
+names(sesion2020)[1] <- "screenName" #Cambiamos el nombre de la primera columna 
 names(sesion2020)[2] <- "score" #Cambiamos el nombre de la segunda columna 
-sesion2020 <- sesion2020 %>% drop_na() #eliminamos los usuarios que fueron eliminados o dejaron de existir
+sesion2020 <- sesion2020 %>% filter(screenName != "no hay dato o no es str") #filtramos los casos donde no hay informacion
 sesion2020$screenName <- gsub(x= sesion2020$screenName, pattern = "[']", replacement = "") #eliminamos las '' de los usuarios
 
 data_2020 <- left_join(sesion2020, tweets2020) #hacemos un join con "tweets2020" xq nos interesa la columna "hashtag"
