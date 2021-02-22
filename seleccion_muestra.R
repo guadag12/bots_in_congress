@@ -1,5 +1,6 @@
 library(readr)
 library(tidyverse)
+library(ggplot2)
 
 ##Traemos los archivos con los que vamos a trabajar
 
